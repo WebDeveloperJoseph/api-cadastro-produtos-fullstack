@@ -1,0 +1,35 @@
+### Testando o Login (POST)
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "email": "josesouza1223@email.com",
+  "senha": "@Ze10207090"
+}
+
+> {%
+    // Isto apanha automaticamente o token que o teu servidor enviou ali na direita
+    client.global.set("auth_token", response.body.token);
+%}
+
+###
+
+### Buscar todos os produtos (GET)
+GET http://localhost:3000/produtos
+Authorization: Bearer {{auth_token}}
+
+### Rota para criar produtos
+POST http://localhost:3000/produtos
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+{
+  "nome": "Caixa de som JBL",
+  "preco": 3299.90,
+  "quantidade": 5
+}
+
+###
+
+DELETE http://localhost:3000/produtos/21
+Authorization: Bearer {{auth_token}}
